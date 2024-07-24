@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
+const userRouter = require("./routes/user.route");
 
 //express app
 const app = express();
@@ -17,3 +18,9 @@ mongoose
   .catch((error) => {
     console.log(error);
   });
+
+//middleware
+app.use(express.json());
+
+//routers
+app.use("/api/user", userRouter);
