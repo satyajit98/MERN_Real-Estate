@@ -1,17 +1,18 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
+const errorHandler = require("../utils/error");
 
-const signUp = async (req, res) => {
+const signUp = async (req, res, next) => {
   const { username, email, password } = req.body;
 
   //validator
   if (!validator.isEmail(email)) {
-    res.status(401).json({ message: "Enter a valid Email" });
+    throw Error("Enter a valid Email");
   }
 
   if (!validator.isStrongPassword(password)) {
-    res.status(401).json({ message: "Password is not strong enough" });
+    throw Error("Password is not strong enough");
   }
 
   //salting and hashing
@@ -23,7 +24,7 @@ const signUp = async (req, res) => {
     const user = await User.create({ username, email, password: hash });
     res.status(200).json({ user });
   } catch (error) {
-    res.status(401).json(error.message);
+    next(errorHandler(505, "error from this function"));
   }
 };
 
