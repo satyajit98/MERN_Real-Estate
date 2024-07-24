@@ -5,6 +5,7 @@ require("dotenv").config();
 //express app
 const app = express();
 
+//connect to db
 mongoose
   .connect(process.env.MONGO)
   .then(() => {
