@@ -24,7 +24,7 @@ const signUp = async (req, res, next) => {
     const user = await User.create({ username, email, password: hash });
     res.status(200).json({ user });
   } catch (error) {
-    next(errorHandler(505, "error from this function"));
+    next(error);
   }
 };
 
