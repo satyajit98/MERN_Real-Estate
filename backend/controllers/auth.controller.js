@@ -46,7 +46,7 @@ const signIn = async (req, res, next) => {
       return next(errorHandler(404, "User not found"));
     }
     //compare password
-    const user = bcrypt.compare(password, isUser.password);
+    const user = await bcrypt.compare(password, isUser.password);
     if (!user) {
       return next(errorHandler(401, "Wrong credentials!"));
     }
