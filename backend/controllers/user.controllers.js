@@ -7,14 +7,15 @@ const getUser = async (req, res) => {
 };
 
 const updateUser = async (req, res, next) => {
-  if (req.user._id !== req.params.id)
+  if (req.user.id !== req.params.id)
     return next(errorHandler(401, "You can only update your own account!"));
 
   try {
     if (req.body.password) {
-      req.body.password = bcrypt.hash(req.body.password, 10);
+      req.body.password = await bcrypt.hash(req.body.password, 10);
     }
-    const updateUser = await User.findByIdAndUpdate(
+
+    const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
       {
         $set: {
@@ -26,7 +27,7 @@ const updateUser = async (req, res, next) => {
       },
       { new: true }
     );
-    const { password, ...rest } = updateUser._doc;
+    const { password, ...rest } = updatedUser._doc;
 
     res.status(200).json(rest);
   } catch (error) {
