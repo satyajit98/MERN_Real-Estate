@@ -84,6 +84,7 @@ const google = async (req, res, next) => {
       const generatedPassword =
         Math.random().toString(36).slice(-8) +
         Math.random().toString(36).slice(-8);
+      //hashing and salting
       const hashedPassword = await bcrypt.hash(generatedPassword, 10);
       const newUser = await User.create({
         username:
@@ -93,6 +94,7 @@ const google = async (req, res, next) => {
         password: hashedPassword,
         photo: req.body.photo,
       });
+      //create token
       const token = jwt.sign(
         { id: newUser.id, email: newUser.email },
         process.env.SECRET,
@@ -109,4 +111,16 @@ const google = async (req, res, next) => {
   }
 };
 
-module.exports = { signUp, signIn, google };
+//signout
+const signOut = async (req, res) => {
+  try {
+    res
+      .clearCookie("access_token")
+      .status(200)
+      .json("User has been logged out!");
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { signUp, signIn, google, signOut };
