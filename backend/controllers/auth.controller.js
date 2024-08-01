@@ -112,7 +112,7 @@ const google = async (req, res, next) => {
 };
 
 //signout
-const signOut = async (req, res) => {
+const signOut = async (req, res, next) => {
   try {
     res
       .clearCookie("access_token")

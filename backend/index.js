@@ -4,6 +4,7 @@ require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const userRouter = require("./routes/user.route");
 const authRouter = require("./routes/auth.route");
+const listingRouter = require("./routes/listing.router");
 
 //express app
 const app = express();
@@ -27,6 +28,7 @@ app.use(cookieParser());
 //routers
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/listing", listingRouter);
 
 //middleware
 app.use((err, req, res, next) => {
