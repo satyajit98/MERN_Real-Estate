@@ -3,6 +3,7 @@ const errorHandler = require("../utils/error");
 const User = require("../models/user.model");
 const Listing = require("../models/listing.model");
 
+// Update user
 const updateUser = async (req, res, next) => {
   if (req.user.id !== req.params.id)
     return next(errorHandler(401, "You can only update your own account!"));
@@ -32,6 +33,7 @@ const updateUser = async (req, res, next) => {
   }
 };
 
+// delete user
 const deleteUser = async (req, res, next) => {
   if (req.user.id !== req.params.id)
     return next(errorHandler(401, "You can only delete your own account"));
@@ -45,6 +47,7 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
+// get User Listings
 const getUserListing = async (req, res, next) => {
   if (req.user.id === req.params.id) {
     try {
