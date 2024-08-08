@@ -123,7 +123,7 @@ export default function CreateListing() {
     try {
       if (formData.imageUrls.length < 1)
         return setError("You must upload at least one image");
-      if (formData.regularPrice < formData.discountPrice)
+      if (+formData.regularPrice < +formData.discountPrice)
         return setError("Discount price must be lower than regular price");
       setLoading(true);
       setError(false);
@@ -272,7 +272,9 @@ export default function CreateListing() {
               />
               <div className="flex flex-col items-center">
                 <p>Regular Price</p>
-                <span className="text-xs">(₹ / month)</span>
+                {formData.type === "rent" && (
+                  <span className="text-xs">(₹ / month)</span>
+                )}
               </div>
             </div>
             {formData.offer && (
@@ -282,14 +284,16 @@ export default function CreateListing() {
                   type="number"
                   id="discountPrice"
                   min="0"
-                  max="10000"
+                  max="100000"
                   required
                   onChange={handleChange}
                   value={formData.discountPrice}
                 />
                 <div className="flex flex-col items-center">
                   <p>Discounted Price</p>
-                  <span className="text-xs">(₹ / month)</span>
+                  {formData.type === "rent" && (
+                    <span className="text-xs">(₹ / month)</span>
+                  )}
                 </div>
               </div>
             )}
