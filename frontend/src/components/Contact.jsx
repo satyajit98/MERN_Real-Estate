@@ -28,13 +28,9 @@ export default function Contact({ listing }) {
         <div className="flex flex-col gap-2">
           <p>
             Contact:
-            <span className=" font-semibold text-green-700">
-              {landlord.username}
-            </span>
+            <span className=" font-semibold">{landlord.username}</span>
             for
-            <span className="font-semibold text-blue-700">
-              {listing.name.toLowerCase()}
-            </span>
+            <span className="font-semibold">{listing.name.toLowerCase()}</span>
           </p>
           <textarea
             className="w-full border p-3 rounded-lg"
