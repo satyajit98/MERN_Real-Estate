@@ -65,6 +65,7 @@ const getListing = async (req, res, next) => {
   }
 };
 
+// get listings for search
 const getListings = async (req, res, next) => {
   try {
     const limit = parseInt(req.query.limit) || 9;
