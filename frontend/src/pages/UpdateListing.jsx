@@ -280,7 +280,7 @@ export default function UpdateListing() {
                 type="number"
                 id="regularPrice"
                 min="9000"
-                max="100000"
+                max="10000000"
                 required
                 onChange={handleChange}
                 value={formData.regularPrice}
@@ -299,7 +299,7 @@ export default function UpdateListing() {
                   type="number"
                   id="discountPrice"
                   min="0"
-                  max="10000"
+                  max="1000000"
                   required
                   onChange={handleChange}
                   value={formData.discountPrice}
