@@ -5,9 +5,7 @@ const cookieParser = require("cookie-parser");
 const userRouter = require("./routes/user.route");
 const authRouter = require("./routes/auth.route");
 const listingRouter = require("./routes/listing.router");
-
-//express app
-const app = express();
+const path = require("path");
 
 //connect to db
 mongoose
@@ -22,6 +20,13 @@ mongoose
     console.log(error);
   });
 
+//create dynamic dir name
+const __variable = path.resolve();
+
+//express app
+const app = express();
+
+//middleware
 app.use(express.json());
 app.use(cookieParser());
 
@@ -30,7 +35,14 @@ app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
 
-//middleware
+//create static folder
+app.use(express.static(path.join(__variable, "/frontend/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__variable, "forntend", "dist", "index.html"));
+});
+
+//middleware for error
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal Server Error";
