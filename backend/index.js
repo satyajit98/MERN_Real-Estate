@@ -39,7 +39,7 @@ app.use("/api/listing", listingRouter);
 app.use(express.static(path.join(__variable, "/frontend/dist")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__variable, "forntend", "dist", "index.html"));
+  res.sendFile(path.join(__variable, "frontend", "dist", "index.html"));
 });
 
 //middleware for error
