@@ -36,10 +36,10 @@ app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
 
 //create static folder
-app.use(express.static(path.join(__variable, "/frontend/dist")));
+app.use(express.static(path.join(__variable, "/frontend/build")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__variable, "forntend", "dist", "index.html"));
+  res.sendFile(path.join(__variable, "forntend", "build", "index.html"));
 });
 
 //middleware for error
